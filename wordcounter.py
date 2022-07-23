@@ -1,53 +1,54 @@
-def get_filename():  # Define the function;
-    """This function requests the file name."""
+def get_filename():
+    """Запрашивает имя текстового файла."""
 
     print("\nEnter 'q' to end the program.")
     file_name = input('Enter the text file name: ')
-    if file_name == 'q':  # If the user entered 'q', then terminate the program;
+    if file_name == 'q':  # Если, пользователь ввел 'q', то программа завершается;
         quit()
-    else:
+    else:  # Получив имя файла, функция возвращает его и вызывает другую функцию;
         return file_name
         checking_file()
 
 
-def get_word():  # Define the function;
-    """This function requests the word."""
+def get_word():  
+    """Запрашивает у пользователя слово."""
 
     word = input('Enter the word: ')
-    if word == 'q':  # # If the user entered 'q', then terminate the program;
+    if word == 'q':  # Если, пользователь ввел 'q', то программа завершается;
         quit()
-    else:
+    else:  # Получив слово, функция возвращает его и вызывает другую функцию;
         return word
         count_words()
 
 
-def checking_file():  # Define the function;
-    """This function checks if there is a file in the directory."""
+def checking_file(): 
+    """Проверяет наличие файла в директории."""
 
-    file_name = get_filename()
-    try:
-        file_name = file_name + '.txt'  # Add the '.txt' extension to the end of the file name;
-        with open(file_name) as f:  # Open the file;
+    file_name = get_filename()  # Сохраняет возвращенное значение в переменной;
+    try:  # Проверка наличия файла
+        file_name = file_name + '.txt'  # Добавляет расширение .txt к имени файла;
+        with open(file_name) as f:  # Открывает файл;
             f.read()
-    except FileNotFoundError:  # If the file is not in the directory, an error message is displayed;
+    except FileNotFoundError:  # Если файла нет в деректории, то выводится сообщение об отсутствии файла;
         print(f"File named '{file_name}' is not found.")
-    else:
+    else:  # Если, файл существует и присутствует в директории, то функция возвращает имя файла;
         return file_name
 
 
-def count_words():  # Define the function;
-    """This function counts how many times the word appears in the text."""
+def count_words():
+    """Считает, сколько раз слово встречается в тексте."""
 
     file_name = checking_file()
-    if file_name:  # Checking if the value matches
+    if file_name:  # Проверяет наличие имени файла в переменной;
         word = get_word()
-        with open(file_name) as f:  # Open the file;
-            content = f.read()  # Read the file and place it in a variable;
-        word_count = content.lower().count(word)  # Word counting
+        with open(file_name) as f:  # Открывает файл;
+            content = f.read()  # Читает файл и сохраняет его содержимое в переменной;
+        word_count = content.lower().count(word)  # Финальный подсчет;
         print(f"\tThe word '{word}' appears {word_count} times in the text.")
     else:
         count_words()
 
 
-while True:  # Starting the cycle
+while True:  # Запускает цикл
     count_words()
+# Конец
