@@ -48,7 +48,6 @@ def count_words():
     else:
         count_words()
 
-
-while True:  # Запускает цикл
-    count_words()
+        
+count_words()
 # Конец
